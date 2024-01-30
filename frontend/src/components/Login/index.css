@@ -1,0 +1,64 @@
+body {
+  position: absolute;
+  z-index: 1;
+}
+.login {
+  background-color: white;
+  position: absolute;
+
+  height: 600px;
+  width: 500px;
+  margin-top: 200px;
+  margin-right: 100px;
+  /* margin-bottom: 15px;  */
+  margin-left: 1000px;
+  border: 2px solid rgb(11, 159, 162);
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px rgb(11, 159, 162);
+}
+
+.loginBox {
+  padding: 20px;
+  padding-top: 30px;
+}
+.h1 {
+  color: #023e8a;
+
+  font-family: "Josefin Sans";
+  font-size: 31.141px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.inputDiv {
+  padding-right: 50px;
+  margin-left: 50px;
+  padding: 10px;
+}
+
+input {
+  border: none;
+  border-bottom: 2px solid blue;
+  width: 80%;
+  font-size: 20px;
+  outline: none;
+}
+
+.bt {
+    width: 30%;
+  margin-left: 50px;
+  margin-top: 20px;
+  border-radius: 10px;
+  background: #00b4d8;
+  font-size: medium;
+  color: white;
+  cursor: pointer;
+  font-weight: 400;
+  padding: 10px;
+}
+
+.i{
+    /* color: white; */
+    height: 20px;
+}

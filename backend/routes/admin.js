@@ -4,7 +4,7 @@ const { Slot } = require('../models/slot');
 const { User } = require('../models/user');
 const router= express.Router()
 
-router.post("/getAdmin", isAdmin, (req, res)=>{
+router.get("/getAdmin", isAdmin, (req, res)=>{
     try{
       
         const adminUser= req.user;

@@ -4,7 +4,7 @@ const multer= require('multer')
 
 const isLogin= require('../middlewares/isLogin')
 const { User } = require('../models/user')
-
+const {Slot} = require('../models/slot')
 const upload = multer({ dest: "images/" });
 
 router.get('/getUser', isLogin, async(req,res)=>{
