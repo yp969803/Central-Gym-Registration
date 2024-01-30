@@ -10,12 +10,14 @@ const upload = multer({ dest: "images/" });
 router.get('/getUser', isLogin, async(req,res)=>{
     try{
       const email= req.query.email
-      if(email==null){
+      
+      if(email=="null"){
         const user= req.user
         return res.status(200).json({user: user})
       }
+      
       const user= await User.findOne({email: email})
-      if(user==null){
+      if(!user){
         return res.status(404).json("User with this email does not exist")
       }
 
@@ -28,12 +30,38 @@ router.get('/getUser', isLogin, async(req,res)=>{
 
 router.put('/changeSlot', isLogin, async (req,res)=> {
   try{
-    let slot= req.query.slot;
+    let qSlot= req.query.slot;
     
-
     const user= await User.findOne({email:req.user.email})
-    user.slot= slot
+  
+    let preSlot= Slot.findOne({name: user.slot})
+    if(!qSlot&&preSlot){
+       user.slot= null;
+       await user.save();
+       preSlot.filledSeats=preSlot.filledSeats-1;
+       await preSlot.save()
+       return res.status(200).json({user: user})
+    }
+
+    if(!qSlot&&!preSlot){
+      user.slot= null;
+       await user.save();
+       return res.status(200).json({user: user})
+      
+    }
+    const slotNew= Slot.findOne({name:qSlot})
+    if(!slotNew){
+      return res.status(404).send(`This slot doesn't exists`);
+    }
+    if(slotNew.totalSeats-slotNew.filledSeats<1){
+      return res.status(404).send(`No seats available in this slot`);
+    }
+
+    user.slot=  qSlot;
     await user.save()
+    slotNew.filledSeats= slotNew.filledSeats+1;
+    await slotNew.save()
+  
     return res.status(200).json({user: user})
   }catch(e){
     return  res.status(500).json("Internal server error")
