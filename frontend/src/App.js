@@ -12,6 +12,8 @@ import { getAdmin } from './apis/admin';
 import { useContext, useEffect } from 'react';
 import userContext from './context/user/userContext';
 import adminContext from './context/admin/adminContext';
+import Navbar from './components/navbar';
+import StudentDetails from './components/StudentDetails';
 
 
 function App() {
@@ -34,7 +36,7 @@ function App() {
       
       setUser(res1.user)
       if(location.pathname=="/"){
-        navigate("/userHome")
+        navigate("/studentDetails/"+res1.user.email)
         return
       }
       
@@ -63,10 +65,11 @@ function App() {
     <div>
    
   
-   
+    <Navbar/>
     
     <Routes>
       <Route path='/' element={<Login/>}/>
+      <Route path="/studentDetails/:email" element={<StudentDetails/>} />      
     </Routes>
     <img src={bodyLogo} className="bodyLogo"/>
     <img  src={bottomLogo} className='bottomLogo'/>
