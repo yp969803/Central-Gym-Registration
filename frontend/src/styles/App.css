@@ -4,13 +4,20 @@ body{
 
 }
 
+
+/* .cl{
+  position: relative;
+  z-index: -1;
+} */
+
 .bodyLogo{
   margin-top: 150px; /* Top margin */
   margin-right: 10px; /* Right margin */
   margin-bottom: 20px; /* Bottom margin */
   margin-left: 250px; 
-  position: relative;
   z-index: -1;
+  /* position: relative; */
+  
 }
 
 .bottomLogo{
@@ -18,7 +25,7 @@ body{
   margin-bottom: 20px; /* Bottom margin */
 
   
-  z-index: -1;
+
 
 }
 

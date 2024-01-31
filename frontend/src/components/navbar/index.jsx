@@ -8,7 +8,7 @@ const Navbar = () => {
   const {user}= useContext(userContext)
   
   return (
-    <nav >
+    <nav className='nav'>
         <label className="logo" >
             <img src={iitrLogo}/>
         </label>

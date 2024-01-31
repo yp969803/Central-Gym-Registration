@@ -71,8 +71,11 @@ function App() {
       <Route path='/' element={<Login/>}/>
       <Route path="/studentDetails/:email" element={<StudentDetails/>} />      
     </Routes>
-    <img src={bodyLogo} className="bodyLogo"/>
+    <div className='cl'> 
+       <img src={bodyLogo} className="bodyLogo"/>
     <img  src={bottomLogo} className='bottomLogo'/>
+    </div>
+   
     {/* <img src={sideLogo} className="sideLogo"/> */}
 
     </div>

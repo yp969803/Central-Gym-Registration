@@ -1,14 +1,18 @@
-body{
+/* body{
     position: absolute;
     z-index: 1;
-}
+} */
 
 .nav{
-    background-color: #32aeca;
+    /* background-color: #5ccae2; */
     height: 80px;
     width: 100%;
+    position: relative;
+    top: 0px;
+    z-index: 2;
 }
 nav ul{
+    /* position: absolute; */
     float: right;
     margin-right: 20px;
 }

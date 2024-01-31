@@ -37,8 +37,12 @@ export const uploadUserImage= async(token, file)=>{
 export const getUserImage = async(token, email)=>{
     const url= BACKEND_URL+"/user/image?email="+email;
     const res = await axios.get(url, {
+        responseType: 'blob',
+
         headers:{
-            "Authorization": `Bearer ${token}`
+            "Authorization": `Bearer ${token}`,
+            Accept: '*/*',
+
         }
     }) 
 
@@ -46,7 +50,7 @@ export const getUserImage = async(token, email)=>{
 }
 
 export const getAllSlots= async(token)=>{
-    const  url = BACKEND_URL + "/allSlots";
+    const  url = BACKEND_URL + "/user/allSlots";
     const res= await axios.get(url ,{
         headers:{"Authorization" : `Bearer ${token}`},
     });

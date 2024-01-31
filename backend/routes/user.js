@@ -1,6 +1,8 @@
 const express= require('express')
 const router= express.Router()
 const multer= require('multer')
+// const {createReadStream, readStream}= require('multer')
+const fs = require('fs');
 
 const isLogin= require('../middlewares/isLogin')
 const { User } = require('../models/user')
@@ -31,6 +33,9 @@ router.get('/getUser', isLogin, async(req,res)=>{
 router.put('/changeSlot', isLogin, async (req,res)=> {
   try{
     let qSlot= req.query.slot;
+    if(qSlot== "null"){
+      qSlot=null
+    }
     
     const user= await User.findOne({email:req.user.email})
   
@@ -69,7 +74,7 @@ router.put('/changeSlot', isLogin, async (req,res)=> {
     
 })
 
-router.put('/uploadImage', isLogin, upload.single("image"),async(req, res)=>{
+router.put('/uploadImage', isLogin, upload.single("file"),async(req, res)=>{
     try{
     const imageName = req.file.filename;
     const user= await User.findOne({email:req.user.email})
@@ -86,7 +91,7 @@ router.get("/image", async(req, res) => {
 
     try{
     const email=  req.query.email;
-     if(!email ){
+     if(!email || email==='null' ){
         const imageName = req.user.image;
         const readStream = createReadStream(`images/${imageName}`);
         readStream.pipe(res);
@@ -100,10 +105,11 @@ router.get("/image", async(req, res) => {
       if (!imageName) {
         return  res.status(404).json('No Image for this user');
       }
-      const readStream = createReadStream(`images/${imageName}`);
+      const readStream = fs.createReadStream(`images/${imageName}`);
       readStream.pipe(res);
       return
     } catch(err) {
+      console.log(err)
         return  res.status(500).json("Internal server error")
     }
 });
