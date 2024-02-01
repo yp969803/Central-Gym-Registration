@@ -44,7 +44,7 @@ router.post("/addSlot", isAdmin, async(req,res)=>{
 
 router.put("/editSlot/:slotName", isAdmin, async(req, res)=>{
     try{
-
+        
         const slotName= req.params.slotName
         const slot= Slot.findOne({name: slotName})
         if (!slot) {

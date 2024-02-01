@@ -90,16 +90,18 @@ const StudentDetails = () => {
    },[user, uploadUserImage])
   return (
   
-    <div className='cl'>
+    <div className='cl container'>
        <div className="container text-center p-3 my-3 cl2">
         <div className="row">
-            <div className="col-4 p-4">
+            <div className="col-sm-4 p-4">
                
-                <img  className="img" src={image?image:profileDummy} />
+                  <div className="container ">
+                  <img  className=" custom-image" height="300" width="300" src={image?image:profileDummy} />
+                  </div>
                 {user&&email&&user.email==email&&<><input  type="file" onChange={(e)=>setFile(e.target.files[0])} />
                 <button onClick={upload_Image}>Update image</button></>}
             </div>
-            {user_det&&<div className="col-8">
+            {user_det&&<div className="col-sm-8">
                <p>{user_det.name}</p>
                <p>{user_det.email}</p>
                <p>{user_det.enrollment}</p>

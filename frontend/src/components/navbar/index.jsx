@@ -14,7 +14,7 @@ const Navbar = () => {
         </label>
          <ul>
            {user&& <li><Link to={"/studentDetails/"+user.email}  className='a'>Student Details</Link></li>}
-            <li><Link href="#" className='a'>View Slot</Link></li>
+            <li><Link to="/viewSlots" className='a'>View Slot</Link></li>
          </ul>
          
     </nav>

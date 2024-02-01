@@ -16,3 +16,10 @@
    height: 50px;
 
 }
+
+.custom-image{
+    max-width: 100%; /* Adjust the maximum width as needed */
+      max-height: 400px; /* Adjust the maximum height as needed */
+      display: block; /* Ensure proper display */
+      margin: auto; 
+}
