@@ -21,6 +21,8 @@ import adminContext from "./context/admin/adminContext";
 import Navbar from "./components/navbar";
 import StudentDetails from "./components/StudentDetails";
 import ViewSlot from "./components/viewSlots";
+import { PDFViewer } from "@react-pdf/renderer";
+import PdfFile from "./components/PdfFile";
 
 function App() {
   const { user, setUser } = useContext(userContext);
@@ -77,6 +79,7 @@ function App() {
       </div>
 
       {/* <img src={sideLogo} className="sideLogo"/> */}
+   
     </div>
   );
 }

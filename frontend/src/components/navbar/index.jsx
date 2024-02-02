@@ -6,6 +6,7 @@ import userContext from '../../context/user/userContext'
 import adminContext from '../../context/admin/adminContext'
 const Navbar = () => {
   const {user}= useContext(userContext)
+  const {admin}= useContext(adminContext)
   
   return (
     <nav className='nav'>
@@ -14,7 +15,7 @@ const Navbar = () => {
         </label>
          <ul>
            {user&& <li><Link to={"/studentDetails/"+user.email}  className='a'>Student Details</Link></li>}
-            <li><Link to="/viewSlots" className='a'>View Slot</Link></li>
+           {(user!=null || admin!=null)&& <li><Link to="/viewSlots" className='a'>View Slot</Link></li>}
          </ul>
          
     </nav>

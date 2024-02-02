@@ -14,10 +14,10 @@ export const  getUser = async(token, email) => {
 
 export const changeUserSlot= async(token, slot)=>{
     const url = BACKEND_URL+"/user/changeSlot?slot="+slot;
-    const res= await axios.put(url,{
-        headers:{
+    const res= await axios.put(url,{},{
+        
             "Authorization": `Bearer ${token}`
-        }
+        
     })
     return res.data;
 }
