@@ -56,7 +56,7 @@ router.put('/changeSlot', isLogin, async (req,res)=> {
        return res.status(200).json({user: user})
       
     }
-    const slotNew= Slot.findOne({name:qSlot})
+    const slotNew= await Slot.findOne({name:qSlot})
     if(!slotNew){
       return res.status(404).send(`This slot doesn't exists`);
     }
@@ -117,25 +117,36 @@ router.get("/image", async(req, res) => {
     }
 });
 
+
+
 router.get('/allSlots', isLogin, async(req, res)=>{
-    try{
+  try{
 
-        const slots= await  Slot.find();
-        const newSlots=slots.map(async(slot)=>{
-            const users= await User.find({slot: slot.name})
-            slot.users= users 
-            return slot
-        })
-        return res.status(200).json({slots: newSlots})
+      const slots= await  Slot.find();
+  
+      const newSlots= slots.map(async(slot)=>{
+          const users= await User.find({slot: slot.name})
+          // slot.users= users 
+         
+          const newSlot= {name: slot.name, end_time: slot.end_time, start_time: slot.start_time, totalSeats: slot.totalSeats, filledSeats: slot.filledSeats, users: users}
+          
+          return newSlot
+      })
+      console.log(await  Promise.all(newSlots))
+      const resp=await  Promise.all(newSlots)
+      return res.status(200).json({slots: resp})
 
-        
+      
 
-    }catch(e){
-           return res.status(500).send("Internal server error")
+  }catch(e){
+      console.log(e)
+         return res.status(500).send("Internal server error")
 
 
-    }
+  }
 })
+
+
 
 
 module.exports= router

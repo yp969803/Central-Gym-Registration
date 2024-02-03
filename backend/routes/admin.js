@@ -53,10 +53,11 @@ router.put("/editSlot/:slotName", isAdmin, async(req, res)=>{
         if (!slot) {
             return res.status(404).send('The slot does not exist');
         }
-        const {start_time, end_time,  totalSeats} = req.body;
+        const {start_time, end_time,  totalSeats, name} = req.body;
         if(!totalSeats){
             totalSeats= slot.totalSeats
         }
+        slot.name= name
         slot.totalSeats= totalSeats;
         slot.start_time= start_time
         slot.end_time= end_time

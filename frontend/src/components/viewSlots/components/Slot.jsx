@@ -10,10 +10,11 @@ const Slot = ({ user, slot, slots, setSlots , index, setSelectedSlot}) => {
   const [totalSeats, setTotalSeats] = useState(slot ? slot.totalSeats : 0);
   const token = localStorage.getItem("token");
   const EditHandler = async () => {
-    if (token && user && user === "admin" && slots) {
+    if (token && user && user === "admin" && slots&&slot) {
       const func = async () => {
         const res = await editSlot(
           token,
+          slot.name,
           name,
           startTime,
           endTime,
@@ -59,45 +60,46 @@ const Slot = ({ user, slot, slots, setSlots , index, setSelectedSlot}) => {
     }
   }
   return (
-    <div className="col-sm" onClick={()=>setSelectedSlot(index)}>
+   <>{slot&&
+    <div className="col-sm btn" onClick={()=>setSelectedSlot(index)}>
       <div className="card text-center">
         <div className="card-header">Slots</div>
         <div className="card-body">
-          <h5 className="card-title">{slot.name}</h5>
+          <h5 className="card-title">{slot.name?slot.name:""}</h5>
           <p className="card-text ">
             <p>
               {" "}
               <span className="fw-bold">Start-time :</span>{" "}
               <span className="text text-success fw-bold">
-                {slot.start_time}
+                {slot.startTime?slot.start_time:""}
               </span>
             </p>
             <p>
               <span className="fw-bold">End-time :</span>{" "}
-              <span className="text text-success fw-bold">{slot.end_time}</span>
+              <span className="text text-success fw-bold">{slot.end_time?slot.end_time:""}</span>
             </p>
 
             <p>
               <span className="fw-bold">Total Seats :</span>{" "}
               <span className="text text-success fw-bold">
-                {slot.totalSeats}
+                {slot.totalSeats?slot.totalSeats:""}
               </span>
             </p>
             <p>
               <span className="fw-bold">Seats Occupied :</span>{" "}
               <span className="text text-success fw-bold">
-                {slot.filledSeats}
+                {slot.filledSeats?slot.filledSeats:""}
               </span>
             </p>
           </p>
 
-          {
+          {user=="admin"&&
             <div>
               <button
                 type="button"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                data-bs-target={`#${slot.name?slot.name:"id"}`}
               >
                 Edit
               </button>
@@ -110,7 +112,7 @@ const Slot = ({ user, slot, slots, setSlots , index, setSelectedSlot}) => {
       </div>
       <div
         className="modal fade"
-        id="exampleModal"
+        id={`${slot.name?slot.name:"id"}`}
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -167,7 +169,7 @@ const Slot = ({ user, slot, slots, setSlots , index, setSelectedSlot}) => {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   value={totalSeats}
-                  onChange={(e) => setTotalSeats(e.target.value)}
+                  onChange={(e) => setTotalSeats(Number(e.target.value))}
                 />
               </div>
             </form>
@@ -191,7 +193,8 @@ const Slot = ({ user, slot, slots, setSlots , index, setSelectedSlot}) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 

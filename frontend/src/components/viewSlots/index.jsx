@@ -43,10 +43,11 @@ const ViewSlot = () => {
         name: name,
         start_time: startTime,
         end_time: endTime,
-        totalSeats: totalSeats
+        totalSeats: totalSeats,
+        filledSeats: 0
       }
-      slots.push(obj)
-      setSlots(slots)
+    
+      setSlots(pslots=>[...pslots,obj])
       setName(null)
       setStartTime(null)
       setEndTime(null)
@@ -93,9 +94,9 @@ const ViewSlot = () => {
         {admin&&<div className="container">
         <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-primary m-3"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                data-bs-target="#addModal"
               >
                 Add Slot
               </button>
@@ -105,7 +106,7 @@ const ViewSlot = () => {
         <p className="text text-center fs-2">User's</p>
         <div className="container d-flex align-items-center">
          
-          {slots&&slots.length>0&&slots[selectedSlot].users&&slots[selectedSlot].users.map(user=>{
+          {slots&&slots.length>0&&(slots[selectedSlot]!=undefined)&&(slots[selectedSlot].users!=undefined)&&slots[selectedSlot].users.map(user=>{
             return <Link className="mx-auto text text-center fs-3" to={"/studentDetails/"+user.email}>{user.email}</Link>
           })} 
 
@@ -113,7 +114,7 @@ const ViewSlot = () => {
       </div>
       <div
         className="modal fade"
-        id="exampleModal"
+        id="addModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -170,7 +171,7 @@ const ViewSlot = () => {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   value={totalSeats?totalSeats:0}
-                  onChange={(e) => setTotalSeats(e.target.value)}
+                  onChange={(e) => setTotalSeats(Number(e.target.value))}
                 />
               </div>
             </form>

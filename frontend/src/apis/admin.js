@@ -22,11 +22,11 @@ export const addSlot= async(token, name, start_time, end_time, totalSeats)=>{
      return res.data
 }
 
-export const editSlot= async(token, name, start_time, end_time, totalSeats)=>{
+export const editSlot= async(token, preName,newName, start_time, end_time, totalSeats)=>{
     
-    const url=  BACKEND_URL+'/admin/editSlot/'+name;
+    const url=  BACKEND_URL+'/admin/editSlot/'+preName;
     const res= await axios.put(url,{
-        
+        name: newName,
         start_time:start_time,
         end_time:end_time,
         totalSeats:totalSeats
