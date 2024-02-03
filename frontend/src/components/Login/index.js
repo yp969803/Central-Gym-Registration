@@ -65,9 +65,11 @@ const Login = () => {
         const res= await adminLogin(userName, password)
     
         const token= res.access_token
-        setAdmin(res.user)
+        
+        setAdmin("admin")
         localStorage.setItem("token",token)
-        navigate("/adminHome")
+        navigate("/viewSlots")
+        return
 
 
       }

@@ -32,6 +32,7 @@ router.get('/getUser', isLogin, async(req,res)=>{
 
 router.put('/changeSlot', isLogin, async (req,res)=> {
   try{
+  
     let qSlot= req.query.slot;
     if(qSlot== "null"){
       qSlot=null
@@ -39,7 +40,8 @@ router.put('/changeSlot', isLogin, async (req,res)=> {
     
     const user= await User.findOne({email:req.user.email})
   
-    let preSlot= Slot.findOne({name: user.slot})
+    let preSlot= await Slot.findOne({name: user.slot})
+
     if(!qSlot&&preSlot){
        user.slot= null;
        await user.save();
@@ -69,6 +71,7 @@ router.put('/changeSlot', isLogin, async (req,res)=> {
   
     return res.status(200).json({user: user})
   }catch(e){
+    console.log(e)
     return  res.status(500).json("Internal server error")
   }
     
@@ -109,7 +112,7 @@ router.get("/image", async(req, res) => {
       readStream.pipe(res);
       return
     } catch(err) {
-      console.log(err)
+    
         return  res.status(500).json("Internal server error")
     }
 });

@@ -22,7 +22,7 @@ router.post("/login/user", async (req, res) => {
       grant_type: "authorization_code",
     });
     const access_token = tokenRes.data.access_token;
-    console.log(access_token)
+  
     const peopleRes = await axios.get(
       "https://www.googleapis.com/oauth2/v2/userinfo",
       {

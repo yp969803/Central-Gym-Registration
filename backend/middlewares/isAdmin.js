@@ -14,6 +14,7 @@ const isAdmin=(req, res, next)=>{
         })        
 
     }catch(e){
+        
          return res.status(500).send("Internal server error")
     }
 }

@@ -65,7 +65,7 @@ const PdfFile = ({name, email, enrollment, branch, slot, image, slotName}) => (
         <Text style={styles.infoText}>{email}</Text>
         <Text style={styles.infoText}>{enrollment}</Text>
         <Text style={styles.infoText}>BRANCH- {branch.toUpperCase()}</Text>
-        <Text style={styles.infoText}>SLOT - {slotName!='null'?slotName:"Nil"}</Text>
+        <Text style={styles.infoText}>SLOT - {slotName!=null?slotName:"Nil"}</Text>
      {slot&&<>
       <Text style={styles.infoText}>Start-time - {slot.start_time}</Text>
       

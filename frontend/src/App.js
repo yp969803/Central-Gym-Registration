@@ -37,27 +37,42 @@ function App() {
         return;
       }
     }
+    if(token&&token.startsWith("ey")){
+      
+      try {
+        const res2 = await getAdmin(token);
+       
+        setAdmin("admin");
+        if (location.pathname == "/") {
+          navigate("/viewSlots");
+        }
+        return
+      } catch (e) {
+        console.log(e)
+        if (location.pathname != "/") {
+          navigate("/");
+        }
+        return;
+      }
+    }
+   
+   if(token){
     try {
       const res1 = await getUser(token, null);
-
+  
       setUser(res1.user);
       if (location.pathname == "/") {
         navigate("/studentDetails/" + res1.user.email);
         return;
       }
     } catch (e) {
-      try {
-        const res2 = await getAdmin(token);
-        setAdmin(res2.user);
-        if (location.pathname == "/") {
-          navigate("/adminHome");
-        }
-      } catch (e) {
-        if (location.pathname != "/") {
-          navigate("/");
-        }
+      
+      if (location.pathname != "/") {
+        navigate("/");
       }
+      return
     }
+   }
   };
 
   useEffect(() => {

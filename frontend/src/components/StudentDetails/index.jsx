@@ -25,6 +25,7 @@ const StudentDetails = () => {
   const [showDropdowm, setShowDropdown]= useState(false)
 
   const fetchData = async () => {
+    
     if (token && user && email != user.email && token) {
       try {
         const res = await getUser(token, email);
@@ -83,6 +84,7 @@ const StudentDetails = () => {
     }
   }; 
   useEffect(() => {
+   
     fetchData();
     fetchSlotsData();
   }, [user, uploadUserImage]);
@@ -131,7 +133,7 @@ const StudentDetails = () => {
                 </p>
 
                 <p className="text text-center fs-2 fw-bold text-primary">
-                  {user_det.slot != "null" ? user_det.slot : "No slot chosen"}
+                  {(user_det.slot!=null) ? user_det.slot : "No slot chosen"}
                 </p>
               </div>
 
@@ -143,6 +145,7 @@ const StudentDetails = () => {
               <div className={`dropdown ${showDropdowm?"show ":""}`} id="dropdown">
               {slots&&<>
                   {slots.map(slot=>{
+                   
                     if(slot.name!=user_det.slot&&slot.totalSeats-slot.filledSeats>0){
                         return <p className="text text-center fw-bold" onClick={()=>{
                             

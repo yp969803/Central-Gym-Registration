@@ -51,3 +51,7 @@ flex-shrink: 0;
 .logo{
      padding: 10px 10px;
 }
+
+.b{
+    cursor: pointer;
+}

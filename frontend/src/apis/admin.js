@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BACKEND_URL="localhost:8000"
+const BACKEND_URL="http://localhost:8000"
 
 export const getAdmin= async(token)=>{
     const url = BACKEND_URL+"/admin/getAdmin"
@@ -25,7 +25,7 @@ export const addSlot= async(token, name, start_time, end_time, totalSeats)=>{
 export const editSlot= async(token, name, start_time, end_time, totalSeats)=>{
     
     const url=  BACKEND_URL+'/admin/editSlot/'+name;
-    const res= await axios.post(url,{
+    const res= await axios.put(url,{
         
         start_time:start_time,
         end_time:end_time,

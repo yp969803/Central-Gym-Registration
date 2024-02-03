@@ -8,8 +8,9 @@ import Slot from "./components/Slot";
 import toast from 'react-hot-toast'
 
 const ViewSlot = () => {
-  const { admin } = useContext(userContext);
-  const { user } = useContext(adminContext);
+
+  const { admin, setAdmin } = useContext(adminContext);
+  const { user, setUser } = useContext(userContext);
   const token = localStorage.getItem("token");
   const [slots, setSlots] = useState(null);
   const [name, setName] = useState(null);
@@ -19,12 +20,15 @@ const ViewSlot = () => {
   const [selectedSlot, setSelectedSlot]= useState(0)
   const fetchData = async () => {
     if (token) {
+      console.log(admin)
       try {
         if (user) {
           const res = await getAllSlots(token);
+         
           setSlots(res.slots);
         } else if (admin) {
           const res = await getAdminAllSlots(token);
+          console.log(res.slots)
           setSlots(res.slots);
         }
       } catch (e) {}
@@ -57,21 +61,26 @@ const ViewSlot = () => {
 
 
     }else{
+       
        toast.error("Invalid inputs")
     }
   }
 
   useEffect(() => {
+ 
     fetchData();
-  }, [user, admin, setSlots, slots, setSelectedSlot]);
+  }, [ admin, user,setAdmin,setUser, setSelectedSlot]);
 
   return (
     <div>
       <div className="container">
         <div className="row">
-          {slots &&
+      
+          {
+          slots &&
             slots.map((slot, index) => {
-              <Slot
+          
+              return    <Slot
                 user={user ? "user" : "admin"}
                 slot={slot}
                 slots={slots}
@@ -95,10 +104,10 @@ const ViewSlot = () => {
       <div className="container">
         <p className="text text-center fs-2">User's</p>
         <div className="container d-flex align-items-center">
-
-          {slots&&slots[selectedSlot].users.map(user=>{
+         
+          {slots&&slots.length>0&&slots[selectedSlot].users&&slots[selectedSlot].users.map(user=>{
             return <Link className="mx-auto text text-center fs-3" to={"/studentDetails/"+user.email}>{user.email}</Link>
-          })}
+          })} 
 
         </div>
       </div>
