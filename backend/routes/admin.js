@@ -20,7 +20,6 @@ router.post("/addSlot", isAdmin, async(req,res)=>{
     try{
 
         const {name, start_time, end_time, totalSeats}= req.body
-        console.log(req.body)
         if(!totalSeats){
             totalSeats=50
         }
@@ -108,7 +107,7 @@ router.get('/allSlots', isAdmin, async(req, res)=>{
             
             return newSlot
         })
-        console.log(await  Promise.all(newSlots))
+
         const resp=await  Promise.all(newSlots)
         return res.status(200).json({slots: resp})
 
@@ -122,6 +121,21 @@ router.get('/allSlots', isAdmin, async(req, res)=>{
     }
 })
 
+
+router.put('/openSlotSlection',isAdmin, async(req, res)=>{
+    try{
+      
+        const users= await User.find()
+        users.forEach(async(user)=>{
+            user.opened=true 
+            await user.save()
+        })
+        return res.status(200).send("Slot change window is open")
+    }catch(e){
+       console.log(e)
+       return res.status(501).send("Internal Server Error")
+    }
+})
 
 
 

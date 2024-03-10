@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { deleteSlot, editSlot } from "../../../apis/admin";
 import toast from 'react-hot-toast'
 
@@ -39,6 +39,7 @@ const Slot = ({ user, slot, slots, setSlots , index, setSelectedSlot}) => {
     }
   };
 
+
   const DeleteHandler= async()=>{
     if(token&&user&&slots&&slot&&user=="admin"){
         const func= async()=>{
@@ -71,7 +72,7 @@ const Slot = ({ user, slot, slots, setSlots , index, setSelectedSlot}) => {
               {" "}
               <span className="fw-bold">Start-time :</span>{" "}
               <span className="text text-success fw-bold">
-                {slot.startTime?slot.start_time:""}
+                {slot.start_time?slot.start_time:""}
               </span>
             </p>
             <p>

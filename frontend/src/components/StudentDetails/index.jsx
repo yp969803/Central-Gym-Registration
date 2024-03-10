@@ -170,11 +170,11 @@ const StudentDetails = () => {
                 </>}
               </div>
               </div>  
-             {user&&slots&&<>
+             {user&&slots&&image?<>
               <p className="text my-2 fs-4 fw-bold">Gym Access Cerificate</p>
               <PDFViewer>
                 <PdfFile name={user.name} email= {user.email} enrollment={user.enrollment} slotName={user.slot}  branch ={user.branch} slot={slots.find(element => element["name"] === user.slot)?slots.find(element => element["name"] === user.slot):null} image={image}/>
-              </PDFViewer></>}
+              </PDFViewer></>:<>{!image&&"Upload image to get certificate"}</>}
             
             
             </div>

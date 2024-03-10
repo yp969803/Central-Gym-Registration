@@ -9,7 +9,8 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIERECT_URL = process.env.REDIERECT_URL;
 const ADMIN_USERNAME= process.env.ADMIN_USERNAME
 const ADMIN_PASSWORD= process.env.ADMIN_PASSWORD
-
+const auth = require('../server.js').auth;
+const SPREADSHEET_ID= require('../server.js').SPREADSHEET_ID
 
 router.post("/login/user", async (req, res) => {
   try {
@@ -46,10 +47,30 @@ router.post("/login/user", async (req, res) => {
         email:  peopleRes.data.email,
         name: peopleRes.data.given_name,
         enrollment: Number(enrollment),
+        opened: true,
         branch: branch
     })
 
     await newUser.save()
+
+    const client = await auth.getClient();
+    const googleSheets = google.sheets( {version:"v4", auth :client})
+    
+
+
+    await googleSheets.spreadsheets.values.append({
+      auth, 
+      SPREADSHEET_ID,
+      range: "Sheet1",
+      valueInputOption: "USER_ENTERED",
+      resource: {
+        values : [
+          [newUser.name, newUser.enrollment, 0]
+        ]
+      }
+
+    })
+
     return res.status(200).json({user: newUser, access_token: access_token})
 
   } catch (e) {

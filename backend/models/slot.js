@@ -10,6 +10,7 @@ const slotSchema= new mongoose.Schema({
         required: true,
         
     },
+    
     end_time:{
       type:String,
       required: true
