@@ -155,10 +155,10 @@ const StudentDetails = () => {
               </div>
 
               <div className="dropDiv">         
-              <button className="btni" id="btn" onClick={()=> setShowDropdown(!showDropdowm)}>
+             { user&&user.opened==true&&slots&&<button className="btni" id="btn" onClick={()=> setShowDropdown(!showDropdowm)}>
                 Update Slot
                 <i className={`bx bx-chevron-down ${showDropdowm?"arrow":""}`} id="arrow"></i>
-              </button>
+              </button>}
               <div className={`dropdown ${showDropdowm?"show ":""}`} id="dropdown">
               {user&&user.opened==true&&slots&&<>
                   {slots.map(slot=>{

@@ -83,13 +83,13 @@ const Slot = ({ user, slot, slots, setSlots , index, setSelectedSlot}) => {
             <p>
               <span className="fw-bold">Total Seats :</span>{" "}
               <span className="text text-success fw-bold">
-                {slot.totalSeats?slot.totalSeats:""}
+                {slot.totalSeats?slot.totalSeats:0}
               </span>
             </p>
             <p>
               <span className="fw-bold">Seats Occupied :</span>{" "}
               <span className="text text-success fw-bold">
-                {slot.filledSeats?slot.filledSeats:""}
+                {slot.filledSeats&&slot.filledSeats!="null"?slot.filledSeats:0}
               </span>
             </p>
           </p>
