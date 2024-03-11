@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import userContext from "../../context/user/userContext";
 import adminContext from "../../context/admin/adminContext";
 import { getAllSlots } from "../../apis/user";
-import { addSlot, getAdminAllSlots } from "../../apis/admin";
+import { addSlot, getAdminAllSlots, openSlotOption } from "../../apis/admin";
 import {Link} from 'react-router-dom'
 import Slot from "./components/Slot";
 import toast from 'react-hot-toast'
@@ -67,6 +67,23 @@ const ViewSlot = () => {
     }
   }
 
+  const ChangeSlotOptionHandler = async () =>{
+    if(token&&admin){
+   
+      const func= async ()=>{
+        const res= await openSlotOption(token)
+      }
+      toast.promise(func(), {
+        loading: "Adding slotchange Option",
+        success: <b>Slot Change Option added</b>,
+        error: <b>Error occured</b>,
+      });
+    
+    }else{
+      toast.error("Only admin can do this")
+    }
+  }
+
   useEffect(() => {
  
     fetchData();
@@ -100,18 +117,17 @@ const ViewSlot = () => {
               >
                 Add Slot
               </button>
+
+              <button
+                type="button"
+                className="btn btn-primary m-3"
+                onClick={()=>ChangeSlotOptionHandler()}
+              >
+                Open Slot Change Option
+              </button>
         </div>}
       </div>
-      <div className="container">
-        <p className="text text-center fs-2">User's</p>
-        <div className="container d-flex align-items-center">
-         
-          {slots&&slots.length>0&&(slots[selectedSlot]!=undefined)&&(slots[selectedSlot].users!=undefined)&&slots[selectedSlot].users.map(user=>{
-            return <Link className="mx-auto text text-center fs-3" to={"/studentDetails/"+user.email}>{user.email}</Link>
-          })} 
-
-        </div>
-      </div>
+    
       <div
         className="modal fade"
         id="addModal"

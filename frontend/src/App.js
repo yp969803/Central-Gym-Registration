@@ -22,7 +22,7 @@ import Navbar from "./components/navbar";
 import StudentDetails from "./components/StudentDetails";
 import ViewSlot from "./components/viewSlots";
 import { PDFViewer } from "@react-pdf/renderer";
-import PdfFile from "./components/PdfFile";
+import PdfFile from "./components/PdfFile/index1";
 
 function App() {
   const { user, setUser } = useContext(userContext);

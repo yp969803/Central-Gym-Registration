@@ -18,7 +18,7 @@ app.use('/auth', require('./routes/auth'))
 app.use('/user', require('./routes/user'))
 app.use('/admin', require('./routes/admin'))
 
-export{auth,SPREADSHEET_ID} 
+
 
 app.listen(8000, ()=>{
     console.log(`Server is running on port 8000`)

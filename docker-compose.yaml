@@ -1,0 +1,33 @@
+version: "3.3"
+services: 
+  frontend: 
+    container_name: gym-frontend 
+    build: 
+      context: ./frontend 
+      dockerfile: Dockerfile 
+    ports: 
+      - "3000:3000"
+    depends_on: 
+      - backend 
+
+  backend:  
+    container_name: gym_backend
+    build: 
+      context: ./backend 
+      dockerfile: Dockerfile 
+    ports: 
+     - "8000:8000"
+    depends_on:
+      - mongodb
+    env_file: 
+     - env.list
+    
+  mongodb: 
+    container_name: mongodb 
+    image: mongo:5.0.2
+    restart: unless-stopped
+    volumes:
+      - node-mongo-data:/data/db
+  
+volumes:
+      node-mongo-data:

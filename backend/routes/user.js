@@ -8,8 +8,12 @@ const isLogin = require("../middlewares/isLogin");
 const { User } = require("../models/user");
 const { Slot } = require("../models/slot");
 const upload = multer({ dest: "images/" });
-const auth = require("../server.js").auth;
-const SPREADSHEET_ID = require("../server.js").SPREADSHEET_ID;
+const {google} = require('googleapis')
+const auth = new google.auth.GoogleAuth({
+  keyFile: "credentials.json",
+  scopes: "https://www.googleapis.com/auth/spreadsheets"
+})
+const SPREADSHEET_ID= "1pbIZUElUjnHgtwoPUiR36BW25MlrW72goRFtzkLarIw"
 
 router.get("/getUser", isLogin, async (req, res) => {
   try {
@@ -40,7 +44,7 @@ router.put("/changeSlot", isLogin, async (req, res) => {
 
     const user = await User.findOne({ email: req.user.email });
 
-    if (user.opened) {
+    if (user.opened==false) {
       return res.status(501).send("Slot change window is not open");
     }
 
@@ -58,6 +62,7 @@ router.put("/changeSlot", isLogin, async (req, res) => {
 
     if (preSlot != null && preSlot != "null" && qSlot == null) {
       user.slot = null;
+      user.opened=false
       await user.save();
       preSlot.filledSeats = Number(preSlot.filledSeats) - 1;
       await preSlot.save();
@@ -75,6 +80,7 @@ router.put("/changeSlot", isLogin, async (req, res) => {
 
     if (!qSlot && (preSlot == null || preSlot == "null")) {
       user.slot = null;
+      user.opened=false
       await user.save();
       rows[rowIndex] = [user.name, user.enrollment, 0];
       const updateResponse = await googleSheets.spreadsheets.values.update({
@@ -96,6 +102,7 @@ router.put("/changeSlot", isLogin, async (req, res) => {
     }
 
     user.slot = qSlot;
+    user.opened=false
     await user.save();
     slotNew.filledSeats = slotNew.filledSeats + 1;
     await slotNew.save();

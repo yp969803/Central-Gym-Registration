@@ -7,8 +7,7 @@ import {useLocation, useNavigate} from 'react-router-dom'
 import userContext from '../../context/user/userContext'
 import adminContext from '../../context/admin/adminContext'
 const CLIENT_ID="926213978565-6fl0mct538cqju1c2g0mm598hg1onami.apps.googleusercontent.com"
-const CLIENT_SECREST= "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"
-const REDIERECT_URL= "http://localhost:3000"
+const REDIERECT_URL= "https://centralgymregistration.yash.mdgspace.org/"
 
 const Login = () => {
 

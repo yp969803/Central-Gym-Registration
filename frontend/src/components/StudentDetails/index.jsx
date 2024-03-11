@@ -12,7 +12,11 @@ import {
 import profileDummy from "../../assets/profileDummy.png";
 import toast from "react-hot-toast";
 import './index.css'
-import PdfFile from "../PdfFile";
+import PdfFile from "../PdfFile/index1";
+import PdfFile1 from "../PdfFile/index1";
+import PdfFile2 from "../PdfFile/index2";
+import PdfFile3 from "../PdfFile/index3";
+import PdfFile4 from "../PdfFile/index4";
 const StudentDetails = () => {
   const { user, setUser } = useContext(userContext);
   const { email } = useParams();
@@ -84,6 +88,18 @@ const StudentDetails = () => {
       toast.error("No file chosen");
     }
   }; 
+
+
+  const pdfFile= (user )=>{
+     if (user.slot=="2"){
+     return <PdfFile2 name={user.name} email= {user.email} enrollment={user.enrollment} slotName={user.slot}  branch ={user.branch} slot={slots.find(element => element["name"] === user.slot)?slots.find(element => element["name"] === user.slot):null} image={image}/>
+     }else if(user.slot==="3"){
+      return <PdfFile3 name={user.name} email= {user.email} enrollment={user.enrollment} slotName={user.slot}  branch ={user.branch} slot={slots.find(element => element["name"] === user.slot)?slots.find(element => element["name"] === user.slot):null} image={image}/>
+     }else if(user.slot == "4"){
+      return <PdfFile4 name={user.name} email= {user.email} enrollment={user.enrollment} slotName={user.slot}  branch ={user.branch} slot={slots.find(element => element["name"] === user.slot)?slots.find(element => element["name"] === user.slot):null} image={image}/>
+     }
+     return <PdfFile1 name={user.name} email= {user.email} enrollment={user.enrollment} slotName={user.slot}  branch ={user.branch} slot={slots.find(element => element["name"] === user.slot)?slots.find(element => element["name"] === user.slot):null} image={image}/>
+  }
   useEffect(() => {
    
     fetchData();
@@ -144,7 +160,7 @@ const StudentDetails = () => {
                 <i className={`bx bx-chevron-down ${showDropdowm?"arrow":""}`} id="arrow"></i>
               </button>
               <div className={`dropdown ${showDropdowm?"show ":""}`} id="dropdown">
-              {slots&&<>
+              {user&&user.opened==true&&slots&&<>
                   {slots.map(slot=>{
                
                 
@@ -173,7 +189,7 @@ const StudentDetails = () => {
              {user&&slots&&image?<>
               <p className="text my-2 fs-4 fw-bold">Gym Access Cerificate</p>
               <PDFViewer>
-                <PdfFile name={user.name} email= {user.email} enrollment={user.enrollment} slotName={user.slot}  branch ={user.branch} slot={slots.find(element => element["name"] === user.slot)?slots.find(element => element["name"] === user.slot):null} image={image}/>
+                 {pdfFile(user)}
               </PDFViewer></>:<>{!image&&"Upload image to get certificate"}</>}
             
             

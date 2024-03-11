@@ -51,3 +51,10 @@ export const getAdminAllSlots= async(token)=>{
     })
     return res.data;
 }
+
+
+export const openSlotOption = async(token)=>{
+    const url = BACKEND_URL+"/admin/openSlotSlection"
+    const res = await axios.put(url ,{},{headers:{Authorization:`Bearer ${token}`}})
+    return res.data
+}

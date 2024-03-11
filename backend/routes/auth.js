@@ -9,9 +9,12 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIERECT_URL = process.env.REDIERECT_URL;
 const ADMIN_USERNAME= process.env.ADMIN_USERNAME
 const ADMIN_PASSWORD= process.env.ADMIN_PASSWORD
-const auth = require('../server.js').auth;
-const SPREADSHEET_ID= require('../server.js').SPREADSHEET_ID
-
+const {google} = require('googleapis')
+const auth = new google.auth.GoogleAuth({
+  keyFile: "credentials.json",
+  scopes: "https://www.googleapis.com/auth/spreadsheets"
+})
+const SPREADSHEET_ID= "1pbIZUElUjnHgtwoPUiR36BW25MlrW72goRFtzkLarIw"
 router.post("/login/user", async (req, res) => {
   try {
     const { code } = req.body;
