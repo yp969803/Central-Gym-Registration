@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BACKEND_URL="http://localhost:8000"
+const BACKEND_URL="http://backend:8000"
 
 export const getAdmin= async(token)=>{
     const url = BACKEND_URL+"/admin/getAdmin"
