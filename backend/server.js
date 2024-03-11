@@ -14,9 +14,9 @@ app.use(cors())
 dbInit()
 app.use(express.json());
 app.use(express.urlencoded())
-app.use('/auth', require('./routes/auth'))
-app.use('/user', require('./routes/user'))
-app.use('/admin', require('./routes/admin'))
+app.use('/backend/auth', require('./routes/auth'))
+app.use('/backend/user', require('./routes/user'))
+app.use('/backend/admin', require('./routes/admin'))
 
 
 

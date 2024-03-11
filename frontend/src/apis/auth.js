@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BACKEND_URL="http://backend:8000"
+const BACKEND_URL="https://centralgymregistration.yash.mdgspace.org/backend"
 
 export const userLogin= async(code)=>{
     const url= BACKEND_URL + "/auth/login/user"
