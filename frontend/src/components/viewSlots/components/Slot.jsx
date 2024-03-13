@@ -100,7 +100,7 @@ const Slot = ({ user, slot, slots, setSlots , index, setSelectedSlot}) => {
                 type="button"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target={`#${slot.name?slot.name:"id"}`}
+                data-bs-target={`#hello${slot.name?slot.name:"id"}`}
               >
                 Edit
               </button>
@@ -113,7 +113,7 @@ const Slot = ({ user, slot, slots, setSlots , index, setSelectedSlot}) => {
       </div>
       <div
         className="modal fade"
-        id={`${slot.name?slot.name:"id"}`}
+        id={`hello${slot.name?slot.name:"id"}`}
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"

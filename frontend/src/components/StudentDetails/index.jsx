@@ -51,7 +51,7 @@ const StudentDetails = () => {
     if (token) {
       try {
         const res = await getAllSlots(token);
-        console.log(res)
+
         const slots = res.slots;
         setSlots(slots);
       } catch (e) {}

@@ -20,7 +20,7 @@ const ViewSlot = () => {
   const [selectedSlot, setSelectedSlot]= useState(0)
   const fetchData = async () => {
     if (token) {
-      console.log(admin)
+    
       try {
         if (user) {
           const res = await getAllSlots(token);
@@ -28,7 +28,7 @@ const ViewSlot = () => {
           setSlots(res.slots);
         } else if (admin) {
           const res = await getAdminAllSlots(token);
-          console.log(res.slots)
+    
           setSlots(res.slots);
         }
       } catch (e) {}
