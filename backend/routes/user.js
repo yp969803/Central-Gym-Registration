@@ -68,7 +68,7 @@ router.put("/changeSlot", isLogin, async (req, res) => {
       await preSlot.save();
       rows[rowIndex] = [user.name, user.enrollment, 0];
       const updateResponse = await googleSheets.spreadsheets.values.update({
-        spreadsheetId: spreadsheetId,
+        spreadsheetId: SPREADSHEET_ID,
         range: `Sheet1!A${rowIndex + 1}:Z${rowIndex + 1}`, // +1 to convert 0-indexed to 1-indexed
         valueInputOption: "RAW",
         requestBody: {
@@ -84,7 +84,7 @@ router.put("/changeSlot", isLogin, async (req, res) => {
       await user.save();
       rows[rowIndex] = [user.name, user.enrollment, 0];
       const updateResponse = await googleSheets.spreadsheets.values.update({
-        spreadsheetId: spreadsheetId,
+        spreadsheetId: SPREADSHEET_ID,
         range: `Sheet1!A${rowIndex + 1}:Z${rowIndex + 1}`, // +1 to convert 0-indexed to 1-indexed
         valueInputOption: "RAW",
         requestBody: {
@@ -112,7 +112,7 @@ router.put("/changeSlot", isLogin, async (req, res) => {
     }
     rows[rowIndex] = [user.name, user.enrollment, qSlot];
     const updateResponse = await googleSheets.spreadsheets.values.update({
-      spreadsheetId: spreadsheetId,
+      spreadsheetId: SPREADSHEET_ID,
       range: `Sheet1!A${rowIndex + 1}:Z${rowIndex + 1}`, // +1 to convert 0-indexed to 1-indexed
       valueInputOption: "RAW",
       requestBody: {
