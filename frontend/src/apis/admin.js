@@ -1,5 +1,5 @@
 import axios from 'axios'
-const BACKEND_URL="http://centralgymregistration.yash.mdgspace.org:8000/backend"
+const BACKEND_URL="https://centralgymregistration.yash.mdgspace.org:8000/backend"
 
 export const getAdmin= async(token)=>{
     const url = BACKEND_URL+"/admin/getAdmin"
