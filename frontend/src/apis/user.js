@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BACKEND_URL="https://centralgymregistration.yash.mdgspace.org/backend"
+const BACKEND_URL="http://43.205.143.149:8000/backend"
 
 export const  getUser = async(token, email) => {
     const url = BACKEND_URL+"/user/getUser?email="+email
