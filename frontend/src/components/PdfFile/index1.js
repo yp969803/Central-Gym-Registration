@@ -69,7 +69,19 @@ const styles = StyleSheet.create({
   signText:{
     fontSize:15,
     fontWeight: 'bolder',
-    marginTop:30
+  
+  },
+  facInfo: {
+    display : "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    padding: "5"
+  },
+  personInfo : {
+    display: "flex",
+    flexDirection: "col",
+    justifyContent: "flex-start",
+    padding: '25'
   }
 
 });
@@ -139,7 +151,19 @@ const PdfFile1 = ({name, email, enrollment, branch, slot, image, slotName}) => (
         </View>    
 
       </View>
-      <Text style={styles.signText}>SPORTS INCHARGE</Text>  
+     <View style={styles.facInfo}>
+     <View style={styles.personInfo}>
+     <Text style={styles.signText}>PRAMOD KUMAR</Text> 
+     <Text style={styles.signText}>GYM INCHARGE</Text> 
+
+     </View>
+     <View style={styles.personInfo}>
+     <Text style={styles.signText}>Dr. ALOK KUMAR PANDEY</Text> 
+     <Text style={styles.signText}>SPORTS OFFICER</Text> 
+
+     </View>
+
+     </View>
     </Page>
     )
   </Document>
